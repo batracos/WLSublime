@@ -1,0 +1,82 @@
+<snippet>
+	<content><![CDATA[(*
+*******************************************************************************
+					$1
+*******************************************************************************
+*)
+
+Options[$1] = {
+} // SortBy[ToString @* First];
+
+$1HiddenOptions = {
+} // SortBy[ToString @* First];
+
+$1[s___] :=
+Block[
+	{
+		a, args, opts, result,
+		\$FunctionName, \$AllowFailure,
+		GetOption, Fail
+	},
+
+	a = System`Private`Arguments[
+		$1[s],  (* input pattern *)
+		{1, 2}, (* arguments number *)
+		List,   (* arguments and options wrapper *)
+		$1HiddenOptions
+	];
+
+	(
+		\$FunctionName = $1; (* available in the function's scope *)
+		\$AllowFailure = False; (* set to True to allow a failure output *)
+		{args, opts} = a;
+
+		With[
+			{o = opts, f = \$FunctionName},
+			(* utilitiy to query options *)
+			GetOption[name_] := OptionValue[{f, $1HiddenOptions}, o, name];
+					(* utilitiy to abort upon error *)
+			Fail[name_, values___] := (
+				Message[MessageName[f, name], values];
+				Throw[\$Failed, f]
+			);
+			Fail[] := (
+				Throw[\$Failed, f]
+			);
+		];
+
+		result = Catch[i$1[args, opts], \$FunctionName];
+
+		result /; !FailureQ[result] || \$AllowFailure
+	) /; Length[a] == 2
+
+]
+
+(* Interface *)
+
+i$1[args_, opts_] := 
+Module[
+	{
+		},
+
+	(* Arguments parsing *)
+
+	(* Options parsing *)
+
+	(* Result *)
+	o$1[___]
+
+]
+
+(* Main function *)
+
+o$1[___] := Module[
+	{},
+
+	Success[]
+]
+
+]]></content>
+	<tabTrigger>newFun</tabTrigger>
+	<description>New function template</description>
+</snippet>
