@@ -1,0 +1,1597 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     69902,       1589]
+NotebookOptionsPosition[     67054,       1533]
+NotebookOutlinePosition[     67411,       1549]
+CellTagsIndexPosition[     67368,       1546]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["WLSublime", "Title",ExpressionUUID->"c6267194-b31e-4274-afd5-e156d3946e2c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"$dir", "=", 
+  RowBox[{"ParentDirectory", "@", 
+   RowBox[{"NotebookDirectory", "[", "]"}]}]}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"7fd10985-4c4e-4a08-a133-1d60052a6507"],
+
+Cell[BoxData["\<\"/Files/Repositories/WLSublime\"\>"], "Output",
+ CellLabel->"Out[2]=",ExpressionUUID->"394bda9a-ec37-40a4-bb6a-78af0eb1d99c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Names", "Section",ExpressionUUID->"30f2a3f2-c988-4531-a163-12c87a598cca"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"names", "=", 
+   RowBox[{"Pick", "[", 
+    RowBox[{
+     RowBox[{"Names", "[", "\"\<System`*\>\"", "]"}], ",", 
+     RowBox[{"StringContainsQ", "[", 
+      RowBox[{
+       RowBox[{"Names", "[", "\"\<System`*\>\"", "]"}], ",", 
+       RowBox[{"CharacterRange", "[", 
+        RowBox[{"\"\<A\>\"", ",", "\"\<Z\>\""}], "]"}]}], "]"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"54e83817-b59e-429c-b06b-eda34c5e6799"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "names", "]"}]], "Input",
+ CellLabel->"In[6]:=",ExpressionUUID->"13bb11f4-671c-4773-9d7c-49749fc1a998"],
+
+Cell[BoxData["6146"], "Output",
+ CellLabel->"Out[6]=",ExpressionUUID->"56a9516f-f11d-486b-a4b0-a95ea867019b"]
+}, Open  ]],
+
+Cell["Name list", "Item",ExpressionUUID->"7f8c8e76-2e9a-4791-a60c-e29c0cb3299f"],
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{"$dir", ",", 
+      RowBox[{"\"\<NameList_\>\"", "<>", 
+       RowBox[{"ToString", "@", "$VersionNumber"}], "<>", "\"\<.txt\>\""}]}], 
+     "}"}], "]"}], ",", "names"}], "]"}]], "Input",ExpressionUUID->"cbce7b1c-\
+03c8-4023-b719-99ce180b81e4"],
+
+Cell["Auto-completion", "Item",ExpressionUUID->"6296cd04-a2da-4efb-b136-c8d581356d51"],
+
+Cell[BoxData[
+ RowBox[{"FileNameJoin", "[", 
+  RowBox[{"{", 
+   RowBox[{
+   "$dir", ",", "\"\<Mathematica.tmbundle\>\"", ",", 
+    "\"\<Completions.sublime-completions\>\""}], "}"}], "]"}]], "Input",
+ CellLabel->"In[35]:=",ExpressionUUID->"f1df39da-fe31-4c03-bfb3-fcbe14d54851"],
+
+Cell[BoxData[
+ RowBox[{"Export", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+     "$dir", ",", "\"\<Mathematica.tmbundle\>\"", ",", 
+      "\"\<Completions.sublime-completions\>\""}], "}"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Association", "[", 
+    RowBox[{
+     RowBox[{"\"\<scope\>\"", "->", "\"\<source.mathematica\>\""}], ",", 
+     RowBox[{"\"\<completions\>\"", "\[Rule]", "names"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", "\"\<JSON\>\""}], "\[IndentingNewLine]", 
+  "]"}]], "Input",ExpressionUUID->"6bc53118-c237-4012-898a-a5fcd7cffbee"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Snippets", "Section",ExpressionUUID->"792b204a-71bd-4dfb-a2ba-ac0e93ead0f7"],
+
+Cell[CellGroupData[{
+
+Cell["Template", "Subsection",ExpressionUUID->"9899634e-d905-4e2d-9be5-04227d222b55"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"toTag", "[", 
+   RowBox[{"content_", ",", " ", "tag_"}], "]"}], " ", ":=", " ", "\n", 
+  RowBox[{"Replace", "[", 
+   RowBox[{"content", ",", "\n", "\t", 
+    RowBox[{"{", "\n", "\t\t", 
+     RowBox[{
+      RowBox[{"_Missing", " ", "\[Rule]", " ", "\"\<\>\""}], ",", "\n", 
+      "\t\t", 
+      RowBox[{"s_String", " ", "\[RuleDelayed]", " ", 
+       RowBox[{"StringJoin", "[", 
+        RowBox[{
+        "\"\<<\>\"", ",", " ", "tag", ",", " ", "\"\<>\>\"", ",", " ", "s", 
+         ",", " ", "\"\<</\>\"", ",", " ", "tag", ",", " ", "\"\<>\>\""}], 
+        "]"}]}]}], "\n", "\t", "}"}]}], "\n", "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"toTag", "[", "tag_", "]"}], "[", "content_", "]"}], " ", ":=", 
+  " ", 
+  RowBox[{"toTag", "[", 
+   RowBox[{"content", ",", " ", "tag"}], "]"}]}]}], "Code",
+ CellLabel->"In[47]:=",ExpressionUUID->"3e158342-ecc9-4995-aae6-b0b276549a60"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"WLSnippet", "[", 
+   RowBox[{
+    RowBox[{"a_", "?", "AssociationQ"}], " ", "/;", " ", 
+    RowBox[{"MatchQ", "[", 
+     RowBox[{"a", ",", " ", 
+      RowBox[{"KeyValuePattern", "[", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Content\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"_", "?", "StringQ"}]}], "}"}], "]"}]}], "]"}]}], "]"}], " ",
+   ":=", "\n", 
+  RowBox[{"StringReplace", "[", 
+   RowBox[{
+    RowBox[{"StringJoin", "[", "\n", "\t", 
+     RowBox[{"\"\<<snippet>\\n\>\"", ",", "\n", "\t", "\"\<\\t\>\"", ",", " ", 
+      RowBox[{
+       RowBox[{"toTag", "[", "\"\<content\>\"", "]"}], "[", 
+       RowBox[{"\"\<<![CDATA[\>\"", " ", "<>", " ", 
+        RowBox[{"Lookup", "[", 
+         RowBox[{"a", ",", " ", "\"\<Content\>\"", ",", " ", "\"\<\>\""}], 
+         "]"}], " ", "<>", " ", "\"\<]]>\>\""}], "]"}], ",", " ", 
+      "\"\<\\n\>\"", ",", "\n", "\t", "\"\<\\t\>\"", ",", " ", 
+      RowBox[{
+       RowBox[{"toTag", "[", "\"\<tabTrigger\>\"", "]"}], "[", 
+       RowBox[{"Lookup", "[", 
+        RowBox[{"a", ",", " ", "\"\<Key\>\""}], "]"}], "]"}], ",", " ", 
+      "\"\<\\n\>\"", ",", "\n", "\t", "\"\<\\t\>\"", ",", " ", 
+      RowBox[{
+       RowBox[{"toTag", "[", "\"\<scope\>\"", "]"}], "[", 
+       RowBox[{"Lookup", "[", 
+        RowBox[{"a", ",", " ", "\"\<Scope\>\""}], "]"}], "]"}], ",", " ", 
+      "\"\<\\n\>\"", ",", "\n", "\t", "\"\<\\t\>\"", ",", " ", 
+      RowBox[{
+       RowBox[{"toTag", "[", "\"\<description\>\"", "]"}], "[", 
+       RowBox[{"Lookup", "[", 
+        RowBox[{"a", ",", " ", "\"\<Description\>\""}], "]"}], "]"}], ",", 
+      " ", "\"\<\\n\>\"", ",", "\n", "\t", "\"\<</snippet>\>\""}], "\n", 
+     "]"}], ",", " ", 
+    RowBox[{"\"\<\\t\\n\>\"", " ", "\[Rule]", " ", "\"\<\>\""}]}], 
+   "]"}]}]], "Code",
+ CellLabel->"In[87]:=",ExpressionUUID->"19fce641-e0d6-4589-88d3-28a9e3d78acd"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "$snippetTemplate", " ", "=", " ", "\n", 
+   "\"\<<snippet>\n\\t<content><![CDATA[_content]]></content>\n\\t<!-- \
+Optional: Tab trigger to activate the snippet -->\n\
+\\t<tabTrigger>_key</tabTrigger>\n\\t<!-- Optional: Scope the tab trigger \
+will be active in -->\n\\t<scope>_scope</scope>\n\\t<!-- Optional: \
+Description to show in the menu -->\n\
+\\t<description>_description</description>\n</snippet>\>\""}], ";"}]], "Code",\
+
+ CellLabel->"In[37]:=",ExpressionUUID->"887850ea-71fd-4f28-a201-584fbdcfe6cf"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["New function", "Subsection",ExpressionUUID->"f5a6972d-f03c-4f66-a631-9c7d5670e023"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"code", "=", 
+   RowBox[{"StringReplace", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Import", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "$dir", ",", "\"\<Notes\>\"", ",", "\"\<Snippets\>\"", ",", 
+          "\"\<NewFunction.wl\>\""}], "}"}], "]"}], ",", "\"\<String\>\""}], 
+      "]"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"\"\<$\>\"", "\[Rule]", "\"\<\\$\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"\"\<MyFun\>\"", " ", "\[Rule]", " ", "\"\<$1\>\""}]}], 
+      "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}]], "Input",
+ CellLabel->"In[78]:=",ExpressionUUID->"d4c0d6eb-15ea-41a8-ac87-3b5ba7909bee"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"snippet", "=", 
+   RowBox[{"WLSnippet", "[", 
+    RowBox[{"Association", "[", 
+     RowBox[{
+      RowBox[{"\"\<Content\>\"", "\[Rule]", "code"}], ",", 
+      RowBox[{"\"\<Key\>\"", "\[Rule]", "\"\<newFun\>\""}], ",", 
+      RowBox[{
+      "\"\<Description\>\"", "\[Rule]", "\"\<New function template\>\""}]}], 
+     "]"}], "]"}]}], ";"}]], "Input",
+ CellLabel->"In[88]:=",ExpressionUUID->"fe9f4a9c-6450-4548-9ef9-6b15671fabc7"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+     "$dir", ",", "\"\<Mathematica.tmbundle\>\"", ",", "\"\<Snippets\>\"", 
+      ",", "\"\<newFun.sublime-snippet\>\""}], "}"}], "]"}], ",", "snippet", 
+   ",", "\"\<String\>\""}], "]"}]], "Input",
+ CellLabel->"In[89]:=",ExpressionUUID->"6063afe2-5eb8-447e-b49c-88a88cad33a0"],
+
+Cell[BoxData["\<\"/Files/Repositories/WLSublime/Mathematica.tmbundle/Snippets/\
+newFun.sublime-snippet\"\>"], "Output",
+ CellLabel->"Out[89]=",ExpressionUUID->"76f0d209-bcbd-448a-94c3-02894a2e0ada"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Syntax", "Section",ExpressionUUID->"e87d43eb-1bd6-4f76-9e2f-1c0f5bb19916"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$fileTypes", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<m\>\"", ",", " ", "\"\<nb\>\"", ",", " ", "\"\<wl\>\"", ",", " ", 
+     "\"\<wls\>\""}], "}"}]}], ";"}]], "Input",
+ CellLabel->"In[38]:=",ExpressionUUID->"ab02020c-ec89-4f14-afaf-b09c3f79c8e0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"syntax", " ", "=", " ", 
+   RowBox[{"<|", "\n", "\t", 
+    RowBox[{
+     RowBox[{"\"\<name\>\"", " ", "\[Rule]", " ", "\"\<Mathematica\>\""}], 
+     ",", " ", "\n", "\t", 
+     RowBox[{"\"\<fileTypes\>\"", " ", "\[Rule]", " ", "$fileTypes"}], ",", 
+     "\n", "\t", 
+     RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+      RowBox[{"{", "\n", "\t\t", 
+       RowBox[{
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#static_symbols\>\""}], 
+         "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", 
+          "\"\<#global_variables\>\""}], "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", 
+          "\"\<#global_variable_definitions\>\""}], "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", 
+          "\"\<#top_level_definition\>\""}], "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#gu_symbols\>\""}], 
+         "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", 
+          "\"\<#dangerous_symbols\>\""}], "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", 
+          "\"\<#static_assoc_lookup\>\""}], "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", 
+          "\"\<#scoping_functions\>\""}], "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", 
+          "\"\<#line_declarations\>\""}], "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#builtin_symbols\>\""}],
+          "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", 
+          "\"\<#builtin_operators\>\""}], "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", 
+          "\"\<#pattern_variables\>\""}], "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#array_index\>\""}], 
+         "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{"\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#string\>\""}], 
+         "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{"\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#number\>\""}], 
+         "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{"\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#list\>\""}], 
+         "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#association\>\""}], 
+         "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#emptyfunction\>\""}], 
+         "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#function\>\""}], 
+         "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{
+         "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#prepostfunction\>\""}],
+          "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{"\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#symbol\>\""}], 
+         "|>"}], ",", "\n", "\t\t", 
+        RowBox[{"<|", 
+         RowBox[{"\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#comment\>\""}],
+          "|>"}]}], "\n", "\t", "}"}]}], ",", "\n", "\t", 
+     RowBox[{"\"\<keyEquivalent\>\"", " ", "\[Rule]", " ", "\"\<^~M\>\""}], 
+     ",", " ", 
+     RowBox[{
+     "\"\<uuid\>\"", " ", "\[Rule]", " ", 
+      "\"\<EB28CBAC-55D2-4CAD-B996-2F4A44FDF2B8\>\""}], ",", " ", 
+     RowBox[{
+     "\"\<scopeName\>\"", " ", "\[Rule]", " ", "\"\<source.mathematica\>\""}],
+      ",", "\n", "\t", 
+     RowBox[{"\"\<repository\>\"", " ", "\[Rule]", " ", 
+      RowBox[{"<|", "\n", "\t\t", 
+       RowBox[{
+        RowBox[{"\"\<number\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{
+           "\"\<match\>\"", " ", "\[Rule]", " ", 
+            "\"\<\\\\b(\\\\d+(\\\\.\\\\d*)?)\>\""}], ",", " ", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<constant.numeric.mathematica\>\""}]}], "\n", "\t\t", 
+          "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<prepostfunction\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+           RowBox[{"{", "\n", "\t\t\t\t", 
+            RowBox[{
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<[a-zA-Z0-9]+(?=\\\\s*/?@{1,3}\\\\s*)\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<meta.function-call.mathematica\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<(?<=// )[a-zA-Z0-9]+\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<meta.function-call.mathematica\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}]}], "\n", "\t\t\t", "}"}]}], "\n", "\t\t", 
+          "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<array_index\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"{", "\n", "\t\t\t\t", 
+             RowBox[{
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<$self\>\""}], 
+               "|>"}], ",", "\n", "\t\t\t\t", 
+              RowBox[{"<|", "\n", "\t\t\t\t\t", 
+               RowBox[{
+                RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<,\>\""}], 
+                ",", " ", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<punctuation.separator.part.mathematica\>\""}]}], "\n", 
+               "\t\t\t\t", "|>"}]}], "\n", "\t\t\t", "}"}]}], ",", "\n", 
+           "\t\t\t", 
+           RowBox[{"\"\<end\>\"", " ", "\[Rule]", " ", "\"\<\\\\]\\\\]\>\""}],
+            ",", "\n", "\t\t\t", 
+           RowBox[{"\"\<beginCaptures\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"<|", 
+             RowBox[{"\"\<0\>\"", " ", "\[Rule]", " ", 
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<punctuation.part.begin.mathematica\>\""}], "|>"}]}], 
+             "|>"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<begin\>\"", " ", "\[Rule]", " ", "\"\<\\\\[\\\\[\>\""}], ",", 
+           "\n", "\t\t\t", 
+           RowBox[{"\"\<endCaptures\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"<|", 
+             RowBox[{"\"\<0\>\"", " ", "\[Rule]", " ", 
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<punctuation.part.end.mathematica\>\""}], "|>"}]}], 
+             "|>"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<meta.structure.part.mathematica\>\""}]}], "\n", "\t\t", 
+          "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<builtin_symbols\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", 
+            RowBox[{
+            "\"\<(\\\\b|(?<=_))(\>\"", "<>", "names", "<>", 
+             "\"\<)\\\\b\>\""}]}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<support.function-call.mathematica.system\>\""}]}], "\n", 
+          "\t\t", "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<gu_symbols\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{
+           "\"\<match\>\"", " ", "\[Rule]", " ", 
+            "\"\<(\\\\b|(?<=_))(Match|SetUsage|NNSetUsage)\\\\b\>\""}], ",", 
+           " ", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<support.function-call.mathematica.system\>\""}]}], "\n", 
+          "\t\t", "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<string\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"{", "\n", "\t\t\t\t", 
+             RowBox[{
+              RowBox[{"<|", "\n", "\t\t\t\t\t", 
+               RowBox[{
+                RowBox[{
+                "\"\<match\>\"", " ", "\[Rule]", " ", 
+                 "\"\<\\\\\\\\\\\\[[a-zA-Z]+\\\\]\>\""}], ",", " ", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<constant.character.escape.untitled\>\""}]}], "\n", 
+               "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+              RowBox[{"<|", "\n", "\t\t\t\t\t", 
+               RowBox[{
+                RowBox[{
+                "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\\\\\.\>\""}], 
+                ",", " ", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<constant.character.escape.untitled\>\""}]}], "\n", 
+               "\t\t\t\t", "|>"}]}], "\n", "\t\t\t", "}"}]}], ",", "\n", 
+           "\t\t\t", 
+           RowBox[{"\"\<begin\>\"", " ", "\[Rule]", " ", "\"\<\\\"\>\""}], 
+           ",", " ", 
+           RowBox[{"\"\<end\>\"", " ", "\[Rule]", " ", "\"\<\\\"\>\""}], ",", 
+           " ", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<string.outer.quoted.double.mathematica\>\""}], ",", "\n", 
+           "\t\t\t", 
+           RowBox[{
+           "\"\<contentName\>\"", " ", "\[Rule]", " ", 
+            "\"\<string.quoted.double.mathematica\>\""}]}], "\n", "\t\t", 
+          "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<emptyfunction\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"\"\<captures\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"<|", "\n", "\t\t\t\t", 
+             RowBox[{
+              RowBox[{"\"\<2\>\"", " ", "\[Rule]", " ", 
+               RowBox[{"<|", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<punctuation.function-call.empty.begin.mathematica\>\""}]\
+, "|>"}]}], ",", "\n", "\t\t\t\t", 
+              RowBox[{"\"\<3\>\"", " ", "\[Rule]", " ", 
+               RowBox[{"<|", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<meta.scope.between_empty_brackets\>\""}], "|>"}]}], ",",
+               "\n", "\t\t\t\t", 
+              RowBox[{"\"\<1\>\"", " ", "\[Rule]", " ", 
+               RowBox[{"<|", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<meta.function-call.empty.mathematica\>\""}], "|>"}]}]}],
+              "\n", "\t\t\t", "|>"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<match\>\"", " ", "\[Rule]", " ", 
+            "\"\<((?:[a-zA-Z]+`)*(?:[a-zA-Z$][a-zA-Z0-9$]*))(\\\\[)(\\\\])\>\"\
+"}], ",", " ", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<meta.structure.function-call.empty.mathematica\>\""}]}], 
+          "\n", "\t\t", "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<global_variables\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+           RowBox[{"{", "\n", "\t\t\t\t", 
+            RowBox[{
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<^\\\\$[a-zA-Z][a-zA-Z0-9]+(?= :?=)\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<entity.name.function.global.variable.mathematica\>\""}]}]\
+, "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\$[a-zA-Z0-9$]+\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<global.variable.mathematica\>\""}]}], "\n", "\t\t\t\t", 
+              "|>"}]}], "\n", "\t\t\t", "}"}]}], "\n", "\t\t", "|>"}]}], ",", 
+        "\n", "\t\t", 
+        RowBox[{"\"\<static_assoc_lookup\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{
+           "\"\<match\>\"", " ", "\[Rule]", " ", 
+            "\"\<[a-z][a-zA-Z0-9]*(?=\\\\[\\\\\\\"\\\\w+\\\\\\\"\\\\])\>\""}],
+            ",", " ", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<variable.symbol.mathematica\>\""}]}], "\n", "\t\t", "|>"}]}],
+         ",", "\n", "\t\t", 
+        RowBox[{"\"\<association\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"{", "\n", "\t\t\t\t", 
+             RowBox[{
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<$self\>\""}], 
+               "|>"}], ",", "\n", "\t\t\t\t", 
+              RowBox[{"<|", "\n", "\t\t\t\t\t", 
+               RowBox[{
+                RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<,\>\""}], 
+                ",", " ", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<punctuation.separator.list.mathematica\>\""}]}], "\n", 
+               "\t\t\t\t", "|>"}]}], "\n", "\t\t\t", "}"}]}], ",", "\n", 
+           "\t\t\t", 
+           RowBox[{
+           "\"\<begin\>\"", " ", "\[Rule]", " ", "\"\<\\\\<\\\\|\>\""}], ",", 
+           " ", 
+           RowBox[{"\"\<end\>\"", " ", "\[Rule]", " ", "\"\<\\\\|\\\\>\>\""}],
+            ",", " ", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<meta.structure.assoc.mathematica\>\""}]}], "\n", "\t\t", 
+          "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<set_delayed_patterns\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+           RowBox[{"{", "\n", "\t\t\t\t", 
+            RowBox[{
+             RowBox[{"<|", 
+              RowBox[{
+              "\"\<include\>\"", " ", "\[Rule]", " ", 
+               "\"\<#builtin_symbols\>\""}], "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+              "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#gu_symbols\>\""}],
+               "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+              "\"\<include\>\"", " ", "\[Rule]", " ", 
+               "\"\<#static_symbols\>\""}], "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+              "\"\<include\>\"", " ", "\[Rule]", " ", 
+               "\"\<#builtin_operators\>\""}], "|>"}], ",", "\n", "\t\t\t\t", 
+             
+             RowBox[{"<|", 
+              RowBox[{
+              "\"\<include\>\"", " ", "\[Rule]", " ", 
+               "\"\<#pattern_variables\>\""}], "|>"}], ",", "\n", "\t\t\t\t", 
+             
+             RowBox[{"<|", 
+              RowBox[{
+              "\"\<include\>\"", " ", "\[Rule]", " ", 
+               "\"\<#dangerous_symbols\>\""}], "|>"}], ",", "\n", "\t\t\t\t", 
+             
+             RowBox[{"<|", 
+              RowBox[{
+              "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#string\>\""}], 
+              "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+              "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#number\>\""}], 
+              "|>"}]}], "\n", "\t\t\t", "}"}]}], "\n", "\t\t", "|>"}]}], ",", 
+        "\n", "\t\t", 
+        RowBox[{"\"\<comment\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"{", 
+             RowBox[{"<|", 
+              RowBox[{
+              "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<#comment\>\""}], 
+              "|>"}], "}"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<begin\>\"", " ", "\[Rule]", " ", "\"\<\\\\(\\\\*\>\""}], ",", 
+           " ", 
+           RowBox[{"\"\<end\>\"", " ", "\[Rule]", " ", "\"\<\\\\*\\\\)\>\""}],
+            ",", " ", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<comment.block.mathematica\>\""}]}], "\n", "\t\t", "|>"}]}], 
+        ",", "\n", "\t\t", 
+        RowBox[{"\"\<static_symbols\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+           RowBox[{"{", "\n", "\t\t\t\t", 
+            RowBox[{
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\b(True|False|Null|Automatic|Nothing|All|None|\
+Infinity|DirectedInfinity)\\\\b\>\""}], ",", "\n", "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<constant.language.mathematica.system\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\$(Failed|Aborted)\\\\b\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.semidangerous.constant.mathematica.system\>\""}]}\
+], "\n", "\t\t\t\t", "|>"}]}], "\n", "\t\t\t", "}"}]}], "\n", "\t\t", 
+          "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<symbol\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{
+           "\"\<match\>\"", " ", "\[Rule]", " ", 
+            "\"\<[a-zA-Z$](`[a-zA-Z])*[a-zA-Z0-9$]*\\\\b\>\""}], ",", " ", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<variable.symbol.mathematica\>\""}]}], "\n", "\t\t", "|>"}]}],
+         ",", "\n", "\t\t", 
+        RowBox[{"\"\<list\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"{", "\n", "\t\t\t\t", 
+             RowBox[{
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<$self\>\""}], 
+               "|>"}], ",", "\n", "\t\t\t\t", 
+              RowBox[{"<|", "\n", "\t\t\t\t\t", 
+               RowBox[{
+                RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<,\>\""}], 
+                ",", " ", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<punctuation.separator.list.mathematica\>\""}]}], "\n", 
+               "\t\t\t\t", "|>"}]}], "\n", "\t\t\t", "}"}]}], ",", "\n", 
+           "\t\t\t", 
+           RowBox[{"\"\<end\>\"", " ", "\[Rule]", " ", "\"\<\\\\}\>\""}], ",",
+            "\n", "\t\t\t", 
+           RowBox[{"\"\<beginCaptures\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"<|", 
+             RowBox[{"\"\<0\>\"", " ", "\[Rule]", " ", 
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<punctuation.list.begin.mathematica\>\""}], "|>"}]}], 
+             "|>"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{"\"\<begin\>\"", " ", "\[Rule]", " ", "\"\<\\\\{\>\""}], 
+           ",", "\n", "\t\t\t", 
+           RowBox[{"\"\<endCaptures\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"<|", 
+             RowBox[{"\"\<0\>\"", " ", "\[Rule]", " ", 
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<punctuation.list.end.mathematica\>\""}], "|>"}]}], 
+             "|>"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<meta.structure.list.mathematica\>\""}]}], "\n", "\t\t", 
+          "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<pattern_variables\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+           RowBox[{"{", "\n", "\t\t\t\t", 
+            RowBox[{
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<([a-zA-Z]+`)*([a-zA-Z$][a-zA-Z0-9$]*)(?=:)\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<variable.parameter.mathematica.pattern\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<([a-zA-Z$][a-zA-Z0-9$]*)_{1,3}\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<variable.parameter.mathematica.blank\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}]}], "\n", "\t\t\t", "}"}]}], "\n", "\t\t", 
+          "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<sqlstring\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"{", "\n", "\t\t\t\t", 
+             RowBox[{
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<include\>\"", " ", "\[Rule]", " ", 
+                "\"\<#constant_placeholder\>\""}], "|>"}], ",", "\n", 
+              "\t\t\t\t", 
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<include\>\"", " ", "\[Rule]", " ", 
+                "\"\<#escaped_char\>\""}], "|>"}], ",", "\n", "\t\t\t\t", 
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<source.sql\>\""}],
+                "|>"}]}], "\n", "\t\t\t", "}"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<begin\>\"", " ", "\[Rule]", " ", 
+            "\"\<\\\"(?=\\\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|\
+ALTER))\>\""}], ",", " ", 
+           RowBox[{
+           "\"\<comment\>\"", " ", "\[Rule]", " ", 
+            "\"\<double quoted string\>\""}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<string.quoted.double.sql.mathematica\>\""}], ",", " ", 
+           RowBox[{"\"\<end\>\"", " ", "\[Rule]", " ", "\"\<\\\"\>\""}]}], 
+          "\n", "\t\t", "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<function\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"{", "\n", "\t\t\t\t", 
+             RowBox[{
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<include\>\"", " ", "\[Rule]", " ", "\"\<$self\>\""}], 
+               "|>"}], ",", "\n", "\t\t\t\t", 
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<include\>\"", " ", "\[Rule]", " ", 
+                "\"\<meta.scope.any.mathematica\>\""}], "|>"}], ",", "\n", 
+              "\t\t\t\t", 
+              RowBox[{"<|", "\n", "\t\t\t\t\t", 
+               RowBox[{
+                RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<,\>\""}], 
+                ",", " ", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<punctuation.separator.list.mathematica\>\""}]}], "\n", 
+               "\t\t\t\t", "|>"}]}], "\n", "\t\t\t", "}"}]}], ",", "\n", 
+           "\t\t\t", 
+           RowBox[{"\"\<end\>\"", " ", "\[Rule]", " ", "\"\<\\\\]\>\""}], ",",
+            "\n", "\t\t\t", 
+           RowBox[{"\"\<beginCaptures\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"<|", "\n", "\t\t\t\t", 
+             RowBox[{
+              RowBox[{"\"\<2\>\"", " ", "\[Rule]", " ", 
+               RowBox[{"<|", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<punctuation.function-call.begin.mathematica\>\""}], 
+                "|>"}]}], ",", "\n", "\t\t\t\t", 
+              RowBox[{"\"\<1\>\"", " ", "\[Rule]", " ", 
+               RowBox[{"<|", 
+                RowBox[{
+                "\"\<name\>\"", " ", "\[Rule]", " ", 
+                 "\"\<meta.function-call.mathematica\>\""}], "|>"}]}]}], "\n",
+              "\t\t\t", "|>"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<begin\>\"", " ", "\[Rule]", " ", 
+            "\"\<((?:[a-zA-Z]+`)*[a-zA-Z$][a-zA-Z0-9$]*)(\\\\[)(?!\\\\[)\>\""}\
+], ",", "\n", "\t\t\t", 
+           RowBox[{"\"\<endCaptures\>\"", " ", "\[Rule]", " ", 
+            RowBox[{"<|", "\n", "\t\t\t\t", 
+             RowBox[{"\"\<0\>\"", " ", "\[Rule]", " ", 
+              RowBox[{"<|", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<punctuation.function-call.end.mathematica\>\""}], 
+               "|>"}]}], "\n", "\t\t\t", "|>"}]}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<meta.structure.function-call.mathematica\>\""}]}], "\n", 
+          "\t\t", "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<line_declarations\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{
+           "\"\<match\>\"", " ", "\[Rule]", " ", 
+            "\"\<(PackageImport|PackageExport|PackageScope)\\\\[\\\".*\\\"\\\\\
+]\>\""}], ",", " ", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<meta.package-declaration.mathematica\>\""}]}], "\n", "\t\t", 
+          "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<scoping_functions\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{
+           RowBox[{
+           "\"\<match\>\"", " ", "\[Rule]", " ", 
+            "\"\<\\\\b(With|Block|Module|Scope|Function|SetUsage|\
+SetArgumentCount|Package)\\\\b\>\""}], ",", "\n", "\t\t\t", 
+           RowBox[{
+           "\"\<name\>\"", " ", "\[Rule]", " ", 
+            "\"\<support.scoping.function.mathematica.system\>\""}]}], "\n", 
+          "\t\t", "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<top_level_definition\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+           RowBox[{"{", "\n", "\t\t\t\t", 
+            RowBox[{
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<beginCaptures\>\"", " ", "\[Rule]", " ", 
+                RowBox[{"<|", "\n", "\t\t\t\t\t\t", 
+                 RowBox[{"\"\<1\>\"", " ", "\[Rule]", " ", 
+                  RowBox[{"<|", 
+                   RowBox[{
+                   "\"\<name\>\"", " ", "\[Rule]", " ", 
+                    "\"\<entity.name.function.definition.mathematica\>\""}], 
+                   "|>"}]}], "\n", "\t\t\t\t\t", "|>"}]}], ",", "\n", 
+               "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<begin\>\"", " ", "\[Rule]", " ", 
+                "\"\<^ *([a-zA-Z][a-zA-Z0-9]+)(?=\\\\[[^\\\\n]+:=)\>\""}], 
+               ",", "\n", "\t\t\t\t\t", 
+               RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+                RowBox[{"{", 
+                 RowBox[{"<|", 
+                  RowBox[{
+                  "\"\<include\>\"", " ", "\[Rule]", " ", 
+                   "\"\<#set_delayed_patterns\>\""}], "|>"}], "}"}]}], ",", 
+               "\n", "\t\t\t\t\t", 
+               RowBox[{"\"\<end\>\"", " ", "\[Rule]", " ", "\"\<(:=)\>\""}]}],
+               "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<beginCaptures\>\"", " ", "\[Rule]", " ", 
+                RowBox[{"<|", "\n", "\t\t\t\t\t\t", 
+                 RowBox[{
+                  RowBox[{"\"\<2\>\"", " ", "\[Rule]", " ", 
+                   RowBox[{"<|", 
+                    RowBox[{
+                    "\"\<name\>\"", " ", "\[Rule]", " ", 
+                    "\"\<msg.string.mathematica\>\""}], "|>"}]}], ",", "\n", 
+                  "\t\t\t\t\t\t", 
+                  RowBox[{"\"\<1\>\"", " ", "\[Rule]", " ", 
+                   RowBox[{"<|", 
+                    RowBox[{
+                    "\"\<name\>\"", " ", "\[Rule]", " ", 
+                    "\"\<entity.name.function.definition.mathematica\>\""}], 
+                    "|>"}]}]}], "\n", "\t\t\t\t\t", "|>"}]}], ",", "\n", 
+               "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<begin\>\"", " ", "\[Rule]", " ", 
+                "\"\<^ *([a-zA-Z][a-zA-Z0-9]+::[a-z0-9]+) = \
+(\\\"[^\\\"]+\\\")\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<end\>\"", " ", "\[Rule]", " ", "\"\<\\\\n\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<beginCaptures\>\"", " ", "\[Rule]", " ", 
+                RowBox[{"<|", "\n", "\t\t\t\t\t\t", 
+                 RowBox[{"\"\<1\>\"", " ", "\[Rule]", " ", 
+                  RowBox[{"<|", 
+                   RowBox[{
+                   "\"\<name\>\"", " ", "\[Rule]", " ", 
+                    "\"\<entity.name.function.definition.mathematica\>\""}], 
+                   "|>"}]}], "\n", "\t\t\t\t\t", "|>"}]}], ",", "\n", 
+               "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<begin\>\"", " ", "\[Rule]", " ", 
+                "\"\<^ *([a-zA-Z][a-zA-Z0-9]+)(?= /: [^\\\\n]+:=)\>\""}], ",",
+                "\n", "\t\t\t\t\t", 
+               RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+                RowBox[{"{", 
+                 RowBox[{"<|", 
+                  RowBox[{
+                  "\"\<include\>\"", " ", "\[Rule]", " ", 
+                   "\"\<#set_delayed_patterns\>\""}], "|>"}], "}"}]}], ",", 
+               "\n", "\t\t\t\t\t", 
+               RowBox[{"\"\<end\>\"", " ", "\[Rule]", " ", "\"\<:=\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}]}], "\n", "\t\t\t", "}"}]}], "\n", 
+          "\t\t", "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<dangerous_symbols\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+           RowBox[{"{", "\n", "\t\t\t\t", 
+            RowBox[{
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\b(Buzz|Print|EchoRaw|EchoTiming|Tap|EchoTag|\
+EchoHoldTag|Echo|EchoHold|Abort|Throw|Clear|ClearAll|Remove|\
+UnprotectAndClearAll|Unprotect|Protect|ToExpression)\\\\b\>\""}], ",", "\n", 
+               "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.dangerous.function.mathematica.system\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\b(ThrowFailure|ThrowRawFailure|ThrowTaggedFailure|\
+SoftPanic|Panic)\\\\b\>\""}], ",", "\n", "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.dangerous.function.mathematica.system\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\b(ReturnFailed|ReturnFailure|ReturnTaggedFailure|\
+CatchFailure)\\\\b\>\""}], ",", "\n", "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.semidangerous.function.mathematica.system\>\""}]}\
+], "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\b(DownValues|OwnValues|SubValues|UpValues|Format|\
+MakeBoxes|ToBoxes|HandlerBlock|InheritedBlock|WithLocalSettings|Quiet|Catch|\
+CatchPanic|FailureQ|Message|Failure|RuleCondition)\\\\b\>\""}], ",", "\n", 
+               "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.semidangerous.function.mathematica.system\>\""}]}\
+], "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\b(SetAttributes|SetHoldFirst|SetHoldAll|SetHoldRest|\
+SetHoldAllComplete)\\\\b\>\""}], ",", "\n", "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.semidangerous.function.mathematica.system\>\""}]}\
+], "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\b(HoldAll|HoldFirst|HoldRest|HoldAllComplete|\
+SequenceHold|Listable|Flat|Orderless)\\\\b\>\""}], ",", "\n", "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.semidangerous.function.attributes.mathematica.\
+system\>\""}]}], "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                
+                "\"\<\\\\b(Hold|HoldPattern|HoldForm|HoldMap|HoldSymbolQ|\
+HeldFunctionQ|HoldAtomQ|HoldComplete|ReleaseHold|Unevaluated|Evaluate|Quoted|\
+Unquoted|SemiQuoted|ComposeQuoted|ApplyQuoted)\\\\b\>\""}], ",", "\n", 
+               "\t\t\t\t\t", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.holdiness.function.mathematica.system\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\b(\\\\w*([pP]anic)\\\\w*)\\\\b\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.dangerous.function.mathematica.system\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}]}], "\n", "\t\t\t", "}"}]}], "\n", 
+          "\t\t", "|>"}]}], ",", "\n", "\t\t", 
+        RowBox[{"\"\<builtin_operators\>\"", " ", "\[Rule]", " ", 
+         RowBox[{"<|", "\n", "\t\t\t", 
+          RowBox[{"\"\<patterns\>\"", " ", "\[Rule]", " ", 
+           RowBox[{"{", "\n", "\t\t\t\t", 
+            RowBox[{
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\^:=\>\""}], ",",
+                " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.assignment.up_set_delayed\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<===\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.same\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<=!=\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.not_same\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\>\\\\>\\\\>\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.semidangerous.keyword.operator.mathematica.put_\
+append\>\""}]}], "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\*\\\\^\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.arithmetic.scientific_notation\>\""}]}],
+               "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<:=\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.assignment.set_delayed\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\^=\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.assignment.up_set\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<&&\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.and\>\""}]}], "|>"}], ",", "\n",
+              "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<||\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.or\>\""}]}], "|>"}], ",", "\n", 
+             "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<==\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.equal\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<!=\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.not_equal\>\""}]}], "|>"}], ",",
+              "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\>=\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.greater_than_or_equal\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\<=\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.less_than_or_equal\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<;;\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.span\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<\\\\.\\\\.\\\\.\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.repeated_null\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\.\\\\.\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.repeated\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<//\\\\.\>\""}], ",",
+                " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.replace_repeated\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\</\\\\.\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.replace\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\<-\\\\>\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.semidangerous.keyword.operator.mathematica.\
+undirected_edge\>\""}]}], "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<-\\\\>\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.rule\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<:\\\\>\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.rule_delayed\>\""}]}], "\n",
+               "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<@{1,3}\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.apply\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<//@\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.map_all\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\</@\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.map\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\<\\\\>\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.string_join\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\<\\\\<\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.get\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\>\\\\>\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                
+                "\"\<support.semidangerous.keyword.operator.mathematica.put\>\
+\""}]}], "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\</;\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.condition\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\</:\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.tag\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<//\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.postfix\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<~~\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.string_expression\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\+\\\\+\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.mutoperator.arithmetic.increment\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\+\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.arithmetic.plus\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<--\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.mutoperator.arithmetic.decrement\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<-\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.arithmetic.minus\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\*\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.arithmetic.times\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\</\\\\*\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.right_compose\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<@*\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.left_compose\>\""}]}], "\n",
+               "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\</\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.arithmetic.divide\>\""}]}], "|>"}], ",",
+              "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\^\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.arithmetic.power\>\""}]}], "|>"}], ",", 
+             "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<!\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.not\>\""}]}], "|>"}], ",", "\n",
+              "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\<\\\\|\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<punctuation.assoc.begin.datascope.mathematica\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\|\\\\>\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<punctuation.assoc.end.datascope.mathematica\>\""}]}], 
+              "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\>\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.greater_than\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\<\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.logical.less_than\>\""}]}], "|>"}], ",",
+              "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<|\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.alternative\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<@\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.prefix\>\""}]}], "|>"}], 
+             ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<%\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.percent\>\""}]}], "|>"}], 
+             ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<;\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.compound_expression\>\""}]}]\
+, "\n", "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<&\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<support.scoping.function\>\""}]}], "|>"}], ",", "\n", 
+             "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<#(([a-zA-Z$][a-zA-Z0-9]*)|(\\\\d*))\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<variable.parameter.mathematica.slot\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", 
+                "\"\<[a-zA-Z][a-zA-Z0-9]+::[a-z0-9]+\>\""}], ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<variable.parameter.mathematica.message\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<\\\\?\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.pattern_test\>\""}]}], "\n",
+               "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", "\n", "\t\t\t\t\t", 
+              RowBox[{
+               RowBox[{
+               "\"\<match\>\"", " ", "\[Rule]", " ", "\"\<=\\\\.\>\""}], ",", 
+               " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.operator.mathematica.unset\>\""}]}], "\n", 
+              "\t\t\t\t", "|>"}], ",", "\n", "\t\t\t\t", 
+             RowBox[{"<|", 
+              RowBox[{
+               RowBox[{"\"\<match\>\"", " ", "\[Rule]", " ", "\"\<=\>\""}], 
+               ",", " ", 
+               RowBox[{
+               "\"\<name\>\"", " ", "\[Rule]", " ", 
+                "\"\<keyword.mutoperator.mathematica.set\>\""}]}], "|>"}]}], 
+            "\n", "\t\t\t", "}"}]}], "\n", "\t\t", "|>"}]}]}], "\n", "\t", 
+       "|>"}]}], ",", "\n", "\t", 
+     RowBox[{
+     "\"\<foldingStartMarker\>\"", " ", "\[Rule]", " ", 
+      "\"\<Begin\\\\[\>\""}], ",", "\n", "\t", 
+     RowBox[{
+     "\"\<foldingStopMarker\>\"", " ", "\[Rule]", " ", "\"\<End\\\\[\>\""}]}],
+     "\n", "|>"}]}], ";"}]], "Code",ExpressionUUID->"160721b0-429a-45f7-810e-\
+5e6372a8a654"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1499, 920},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 28, \
+2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 81, 0, 98, "Title",ExpressionUUID->"c6267194-b31e-4274-afd5-e156d3946e2c"],
+Cell[CellGroupData[{
+Cell[686, 26, 207, 4, 30, "Input",ExpressionUUID->"7fd10985-4c4e-4a08-a133-1d60052a6507"],
+Cell[896, 32, 142, 1, 34, "Output",ExpressionUUID->"394bda9a-ec37-40a4-bb6a-78af0eb1d99c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1075, 38, 79, 0, 67, "Section",ExpressionUUID->"30f2a3f2-c988-4531-a163-12c87a598cca"],
+Cell[1157, 40, 474, 12, 30, "Input",ExpressionUUID->"54e83817-b59e-429c-b06b-eda34c5e6799"],
+Cell[CellGroupData[{
+Cell[1656, 56, 141, 2, 30, "Input",ExpressionUUID->"13bb11f4-671c-4773-9d7c-49749fc1a998"],
+Cell[1800, 60, 109, 1, 34, "Output",ExpressionUUID->"56a9516f-f11d-486b-a4b0-a95ea867019b"]
+}, Open  ]],
+Cell[1924, 64, 80, 0, 32, "Item",ExpressionUUID->"7f8c8e76-2e9a-4791-a60c-e29c0cb3299f"],
+Cell[2007, 66, 357, 9, 30, "Input",ExpressionUUID->"cbce7b1c-03c8-4023-b719-99ce180b81e4"],
+Cell[2367, 77, 86, 0, 32, "Item",ExpressionUUID->"6296cd04-a2da-4efb-b136-c8d581356d51"],
+Cell[2456, 79, 278, 6, 30, "Input",ExpressionUUID->"f1df39da-fe31-4c03-bfb3-fcbe14d54851"],
+Cell[2737, 87, 625, 14, 115, "Input",ExpressionUUID->"6bc53118-c237-4012-898a-a5fcd7cffbee"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3399, 106, 82, 0, 67, "Section",ExpressionUUID->"792b204a-71bd-4dfb-a2ba-ac0e93ead0f7"],
+Cell[CellGroupData[{
+Cell[3506, 110, 85, 0, 54, "Subsection",ExpressionUUID->"9899634e-d905-4e2d-9be5-04227d222b55"],
+Cell[3594, 112, 914, 22, 186, "Code",ExpressionUUID->"3e158342-ecc9-4995-aae6-b0b276549a60"],
+Cell[4511, 136, 1871, 41, 205, "Code",ExpressionUUID->"19fce641-e0d6-4589-88d3-28a9e3d78acd"],
+Cell[6385, 179, 548, 11, 224, "Code",ExpressionUUID->"887850ea-71fd-4f28-a201-584fbdcfe6cf"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6970, 195, 89, 0, 54, "Subsection",ExpressionUUID->"f5a6972d-f03c-4f66-a631-9c7d5670e023"],
+Cell[7062, 197, 819, 20, 157, "Input",ExpressionUUID->"d4c0d6eb-15ea-41a8-ac87-3b5ba7909bee"],
+Cell[7884, 219, 463, 11, 30, "Input",ExpressionUUID->"fe9f4a9c-6450-4548-9ef9-6b15671fabc7"],
+Cell[CellGroupData[{
+Cell[8372, 234, 392, 9, 30, "Input",ExpressionUUID->"6063afe2-5eb8-447e-b49c-88a88cad33a0"],
+Cell[8767, 245, 198, 2, 34, "Output",ExpressionUUID->"76f0d209-bcbd-448a-94c3-02894a2e0ada"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9026, 254, 80, 0, 67, "Section",ExpressionUUID->"e87d43eb-1bd6-4f76-9e2f-1c0f5bb19916"],
+Cell[9109, 256, 286, 7, 30, "Input",ExpressionUUID->"ab02020c-ec89-4f14-afaf-b09c3f79c8e0"],
+Cell[9398, 265, 57628, 1264, 7349, "Code",ExpressionUUID->"160721b0-429a-45f7-810e-5e6372a8a654"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
